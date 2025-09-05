@@ -6,3 +6,9 @@ describe('useLocalStorage', () => {
     expect(result.current[0]).toEqual([]);
   });
 });
+
+it('loads existing data from localStorage', () => {
+  localStorage.setItem('todos', JSON.stringify([{ name: 'Test' }]));
+  const { result } = renderHook(() => useLocalStorage('todos', []));
+  expect(result.current[0]).toEqual([{ name: 'Test' }]);
+});
