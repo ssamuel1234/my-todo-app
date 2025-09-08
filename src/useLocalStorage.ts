@@ -1,8 +1,9 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 /**
  * A custom React hook that manages state synced with localStorage.
  * Loads initial value from localStorage if available, otherwise uses the provided default.
+ * Saves the state to localStorage whenever it changes.
  * 
  * @param key - The key to use for storing/retrieving data in localStorage.
  * @param initialValue - The default value to use if no data exists in localStorage.
@@ -16,6 +17,9 @@ function useLocalStorage<T>(key: string, initialValue: T): [T, (value: T) => voi
     const storedValue = localStorage.getItem(key);
     return storedValue ? JSON.parse(storedValue) : initialValue;
   });
+  useEffect(() => {
+    localStorage.setItem(key, JSON.stringify(value));
+  }, [key, value]);
   return [value, setValue];
 }
 
