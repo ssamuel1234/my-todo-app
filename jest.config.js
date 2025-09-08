@@ -6,5 +6,5 @@ export default {
   moduleNameMapper: {
     '\\.(css|less)$': 'identity-obj-proxy'
   },
-  setupFilesAfterEnv: ['@testing-library/jest-dom']
+  setupFilesAfterEnv: ['@testing-library/jest-dom', '<rootDir>/jest.setup.js']
 };
