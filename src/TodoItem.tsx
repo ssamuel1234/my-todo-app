@@ -7,14 +7,19 @@
  * <TodoItem todo={{ name: 'Buy milk', completed: true }} />
  */
 interface TodoItemProps {
-    todo: { name: string; completed: boolean };
+  todo: { id: string; name: string; completed: boolean };
+  onToggle: (id: string) => void;
 }
 
-function TodoItem({ todo }: TodoItemProps) {
+function TodoItem({ todo, onToggle }: TodoItemProps) {
     return (
     <div>
-      <input type="checkbox" checked={todo.completed} readOnly />
-      {todo.name}
+        <input
+          type="checkbox"
+          checked={todo.completed}
+          onChange={() => onToggle(todo.id)}
+        />
+        {todo.name}
     </div>
   );
 }
