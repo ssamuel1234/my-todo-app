@@ -1,3 +1,5 @@
+import { useState } from "react";
+
 /**
  * A React component that displays a todo item with its name and completion status.
  * 
@@ -13,16 +15,24 @@ interface TodoItemProps {
 }
 
 function TodoItem({ todo, onToggle }: TodoItemProps) {
-    return (
-      <div>
-        <input
-          type="checkbox"
-          checked={todo.completed}
-          onChange={() => onToggle(todo.id)}
-        />
-        {todo.name}
-        <button>Edit</button>
-      </div>
+  const [isEditing, setIsEditing] = useState(false);
+    
+  return (
+    <div>
+      <input
+        type="checkbox"
+        checked={todo.completed}
+        onChange={() => onToggle(todo.id)}
+      />
+      {isEditing ? (
+        <input type="text" defaultValue={todo.name} />
+      ) : (
+          <>
+            {todo.name}
+            <button onClick={() => setIsEditing(true)}>Edit</button>  
+          </>
+      )}
+    </div>
   );
 }
 

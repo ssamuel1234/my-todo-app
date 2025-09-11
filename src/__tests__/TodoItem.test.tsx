@@ -24,10 +24,20 @@ describe('TodoItem', () => {
         fireEvent.click(checkbox);
         expect(onToggle).toHaveBeenCalledWith('1');
     });
+
     it('S10 : renders edit button', () => {
         const todo = { id: '1', name: 'Test Todo', completed: false };
         render(<TodoItem todo={todo} onToggle={() => { }} />);
         expect(screen.getByRole('button', { name: /edit/i })).toBeInTheDocument();
+    });
+
+    it('S11 : enters edit mode on edit button click', () => {
+        const todo = { id: '1', name: 'Test Todo', completed: false };
+        render(<TodoItem todo={todo} onToggle={() => { }} />);
+        const editButton = screen.getByRole('button', { name: /edit/i });
+        fireEvent.click(editButton);
+        expect(screen.getByRole('textbox')).toBeInTheDocument();
+        expect(screen.getByRole('textbox')).toHaveValue('Test Todo');
     });
 });
 
