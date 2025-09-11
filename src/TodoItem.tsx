@@ -4,7 +4,8 @@
  * @param props - The component props.
  * @param props.todo - The todo object with name and completed status.
  * @example
- * <TodoItem todo={{ name: 'Buy milk', completed: true }} />
+ * <TodoItem todo={{ name: 'Buy milk', completed: true }} onToggle={(id) 
+ * => console.log(id)} />
  */
 interface TodoItemProps {
   todo: { id: string; name: string; completed: boolean };
@@ -13,14 +14,15 @@ interface TodoItemProps {
 
 function TodoItem({ todo, onToggle }: TodoItemProps) {
     return (
-    <div>
+      <div>
         <input
           type="checkbox"
           checked={todo.completed}
           onChange={() => onToggle(todo.id)}
         />
         {todo.name}
-    </div>
+        <button>Edit</button>
+      </div>
   );
 }
 

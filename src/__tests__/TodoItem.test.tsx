@@ -4,13 +4,13 @@ import TodoItem from '../TodoItem';
 
 describe('TodoItem', () => {
     it(' S7: render todo name', () => {
-        const todo = { name: 'Test Todo', completed: false };
+        const todo = { id: '1', name: 'Test Todo', completed: false };
         render(<TodoItem todo={todo} />);
         expect(screen.getByText('Test Todo')).toBeInTheDocument();
     });
 
     it('S8 : renders completed todo with checked checkbox', () => {
-        const todo = { name: 'Test Todo', completed: true };
+        const todo = { id: '1', name: 'Test Todo', completed: true };
         render(<TodoItem todo={todo} />);
         const checkbox = screen.getByRole('checkbox');
         expect(checkbox).toBeChecked();
@@ -23,6 +23,11 @@ describe('TodoItem', () => {
         const checkbox = screen.getByRole('checkbox');
         fireEvent.click(checkbox);
         expect(onToggle).toHaveBeenCalledWith('1');
+    });
+    it('S10 : renders edit button', () => {
+        const todo = { id: '1', name: 'Test Todo', completed: false };
+        render(<TodoItem todo={todo} onToggle={() => { }} />);
+        expect(screen.getByRole('button', { name: /edit/i })).toBeInTheDocument();
     });
 });
 
